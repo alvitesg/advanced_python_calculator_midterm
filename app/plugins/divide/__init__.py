@@ -2,6 +2,8 @@ import sys
 from decimal import Decimal, InvalidOperation
 from app.commands import Command
 from app.commands import CommandHandler
+from app.plugins.history_manager import HistoryManager
+
 
 class divideCommand(Command):
     def execute(self, *args):
@@ -17,6 +19,8 @@ class divideCommand(Command):
                     print("Error: Cannot divide by zero")
                     return
             result = num1 / num2
+            # capture the successful addition operation in the history
+            HistoryManager.divide_record(str(num1), str(num2), str(result)) # "Divide" is now internally determined
             print(f"The result of dividing {num1} and {num2} is {result}")
         except InvalidOperation:
             print(f"Error: Invalid arguments. Both arguments must be numbers.")
