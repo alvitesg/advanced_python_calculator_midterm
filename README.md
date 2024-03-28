@@ -9,6 +9,15 @@
 # The calculator leverages Pandas to manage a robust calculation history, enabling users to load, save, clear, and delete history records through the REPL interface.
 
 # A. Short description and link to your implememtation of the design patterns you use
+# The design pattern being used in the HistoryManager class, as described in the modifications and usage context provided, is the # 
+# Singleton Pattern. The Singleton Pattern ensures that a class has only one instance and provides a global point of access to it. This 
+# pattern is particularly useful when exactly one object is needed to coordinate actions across the system.
+
+'''Centralized History Management: There should be a single, consistent history of calculations across the application. Using a singleton ensures that all parts of the application contribute to and access the same history.
+
+Resource Efficiency: By ensuring only one instance of the HistoryManager exists, the application conserves resources, avoiding unnecessary duplication of the history data.
+
+Simplified Access: The Singleton Pattern simplifies how different parts of the application access and record calculation history, providing a clear and consistent interface.'''
 
 # B. Description of how you used environment variables and link to your code to illustrate.
 
