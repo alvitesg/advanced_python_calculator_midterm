@@ -2,6 +2,7 @@ import sys
 from decimal import Decimal, InvalidOperation
 from app.commands import Command
 from app.commands import CommandHandler
+from app.plugins.history_manager import HistoryManager
 
 class addCommand(Command):
     def execute(self, *args):
@@ -14,6 +15,8 @@ class addCommand(Command):
             # Convert arguments to Decimal for precision in arithmetic operations
             num1, num2 = map(Decimal, args)
             result = num1 + num2
+            # capture the successful addition operation in the history
+            HistoryManager.add_record("Add", str(num1), str(num2), str(result))
             print(f"The result of adding {num1} and {num2} is {result}")
         except InvalidOperation:
             print("Error: Invalid arguments. Both arguments must be numbers.")
