@@ -16,7 +16,7 @@ class addCommand(Command):
             num1, num2 = map(Decimal, args)
             result = num1 + num2
             # capture the successful addition operation in the history
-            HistoryManager.add_record("Add", str(num1), str(num2), str(result))
+            HistoryManager.add_record(str(num1), str(num2), str(result)) # "Add" is now internally determined
             print(f"The result of adding {num1} and {num2} is {result}")
         except InvalidOperation:
             print("Error: Invalid arguments. Both arguments must be numbers.")

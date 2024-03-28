@@ -26,17 +26,39 @@ class HistoryManager:
 
     def _load_or_initialize_history(self):
         if os.path.exists(self.history_file_path):
-            return pd.read_csv(self.history_file_path)
+            self._history_df = pd.read_csv(self.history_file_path)
         else:
             os.makedirs(os.path.dirname(self.history_file_path), exist_ok=True)
-            return pd.DataFrame(columns=['Operation', 'Operand1', 'Operand2', 'Result'])
+            self._history_df = pd.DataFrame(columns=['Operation', 'Operand1', 'Operand2', 'Result'])
 
     @classmethod
-    def add_record(cls, operation, operand1, operand2, result):
+    def _record_operation(cls, operation, operand1, operand2, result):
+        """A generic method to record an operation to the history DataFrame."""
         instance = cls()  # Ensure instance is initialized
-        new_record = pd.DataFrame({'Operation': [operation], 'Operand1': [operand1], 'Operand2': [operand2], 'Result': [result]})
+        new_record = pd.DataFrame({
+            'Operation': [operation], 
+            'Operand1': [operand1], 
+            'Operand2': [operand2], 
+            'Result': [result]
+        })
         instance._history_df = pd.concat([instance._history_df, new_record], ignore_index=True)
         instance._save_history_to_csv()
+
+    @classmethod
+    def add_record(cls, operand1, operand2, result):
+        cls._record_operation("Add", operand1, operand2, result)
+
+    @classmethod
+    def subtract_record(cls, operand1, operand2, result):
+        cls._record_operation("Subtract", operand1, operand2, result)
+
+    @classmethod
+    def multiply_record(cls, operand1, operand2, result):
+        cls._record_operation("Multiply", operand1, operand2, result)
+
+    @classmethod
+    def divide_record(cls, operand1, operand2, result):
+        cls._record_operation("Divide", operand1, operand2, result)
 
     def _save_history_to_csv(self):
         """Saves the history DataFrame to a CSV file."""
