@@ -1,2 +1,5 @@
 Operation,Operand1,Operand2,Result
-Subtract,1000,30,970
+Add,2.5,3.5,6.0
+Subtract,5,3,2
+Multiply,4,5,20
+Divide,10,2,5
