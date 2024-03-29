@@ -19,6 +19,8 @@ Resource Efficiency: By ensuring only one instance of the HistoryManager exists,
 
 Simplified Access: The Singleton Pattern simplifies how different parts of the application access and record calculation history, providing a clear and consistent interface.'''
 
+'''Logging Utility Creating a logging utility plugin involves setting up a centralized logging mechanism that other parts of your application can use for logging messages. This plugin will configure Python's built-in logging module according to your application's needs. Here's how you can structure and implement the LoggingUtility class within the app/plugins/logging_utility/_init_.py '''
+
 # B. Description of how you used environment variables and link to your code to illustrate.
 
 # C. Explain and link to how you are using logging.
