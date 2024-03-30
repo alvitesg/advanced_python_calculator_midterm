@@ -3,7 +3,9 @@
 
 import unittest
 from unittest.mock import MagicMock
+from unittest.mock import patch
 from app.commands import CommandHandler, AddRecordCommand, ClearHistoryCommand 
+from app.commands.history_command import BaseCommand
 from app.commands import DeleteHistoryCommand, LoadHistoryCommand
 from app.calculation_history import CalculationHistory
 # from app.commands import history_command
@@ -72,3 +74,19 @@ class TestAddRecordCommandWithArguments(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class MockCalculationHistory:
+    def __init__(self):
+        self.history = []
+
+# Test case for BaseCommand
+class TestBaseCommand(unittest.TestCase):
+    @patch('app.commands.history_command.CalculationHistory', new=MockCalculationHistory)
+    def test_history_instance(self):
+        command_instance = BaseCommand()
+        self.assertIsInstance(command_instance.history_instance, MockCalculationHistory)
+        self.assertEqual(command_instance.history_instance.history, [])
+
+if __name__ == '__main__':
+    unittest.main()
+    
