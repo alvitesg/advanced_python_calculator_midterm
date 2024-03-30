@@ -21,7 +21,7 @@ The LBYL is preventative, it searches for the command itself before it executes 
 
 All plugins have LBYL and/or EAFP.
 
-LINK TO VIDEO: XX
+LINK TO VIDEO: https://youtu.be/eIGo1tRMu4U
 
 Core Functionality of the Calculator App
 
