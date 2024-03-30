@@ -18,6 +18,6 @@ class MenuCommand(Command):
     def execute(self, *args):
         print("Available commands:")
         #Access the comand names from teh CommandHandler's commands dictionary
-        for command_name in self.commands_handler.commands.keys():
+        for command_name in sorted(self.commands_handler.commands.keys()):
             print(f"- {command_name}")
             

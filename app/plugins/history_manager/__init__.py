@@ -31,6 +31,10 @@ class HistoryManager:
             os.makedirs(os.path.dirname(self.history_file_path), exist_ok=True)
             self._history_df = pd.DataFrame(columns=['Operation', 'Operand1', 'Operand2', 'Result'])
 
+    def _save_history_to_csv(self):
+        """Save the history Dataframe to a CSV File."""
+        self.history_df.to_csv(self.history_file_path, index=False)
+
     @classmethod
     def _record_operation(cls, operation, operand1, operand2, result):
         """A generic method to record an operation to the history DataFrame."""
@@ -63,3 +67,33 @@ class HistoryManager:
     def _save_history_to_csv(self):
         """Saves the history DataFrame to a CSV file."""
         self._history_df.to_csv(self.history_file_path, index=False)
+
+    @classmethod
+    def load_history(cls):
+        """Loads the history from the CSV file into the DataFrame."""
+        instance = cls()  # Ensures an instance is created following the Singleton pattern
+        try:
+            instance._history_df = pd.read_csv(instance.history_file_path)
+            print("History loaded successfully.")
+        except FileNotFoundError:
+            print("No history file found. Starting with an empty history.")
+            instance._history_df = pd.DataFrame(columns=['Operation', 'Operand1', 'Operand2', 'Result'])
+        except Exception as e:
+            print(f"An error occurred while loading the history: {e}")
+    
+    #clear the record from history
+    def clear_history(self):
+        self.history_df = pd.DataFrame(columns=['Calculations'])
+        self._save_history_to_csv()
+        print("History cleared successfully.")
+
+    #delete the record from history at a specific index
+    def delete_history(self, index):
+        if not os.path.exists(self.history_file) or self.history_df.empty:
+            return False  # Indicates no action was taken
+        if index < 0 or index >= len(self.history_df):
+            raise KeyError(f"Invalid index: {index}")
+        self.history_df = self.history_df.drop(index).reset_index(drop=True)
+        self.save_history()
+        return True
+    
