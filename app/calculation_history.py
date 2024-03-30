@@ -6,6 +6,13 @@ from dotenv import load_dotenv
 class CalculationHistory:
     _instance = None
 
+    def __init__(self):
+        self.history = []  # Ensure this exists in the real class
+    
+    # Example method that modifies history
+    def add_to_history(self, calculation):
+        self.history.append(calculation)
+
     #Code for implementing Singleton
     def __new__(cls):
         if cls._instance is None:
