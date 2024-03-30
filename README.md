@@ -21,6 +21,8 @@ Simplified Access: The Singleton Pattern simplifies how different parts of the a
 
 '''Logging Utility Creating a logging utility plugin involves setting up a centralized logging mechanism that other parts of your application can use for logging messages. This plugin will configure Python's built-in logging module according to your application's needs. Here's how you can structure and implement the LoggingUtility class within the app/plugins/logging_utility/_init_.py '''
 
+# This setup uses a RotatingFileHandler to ensure that the log files rotate when they reach a specified size, keeping the disk usage in check. Logging messages are formatted to include the timestamp, logger name, log level, and message. Logging is configured to write both to a file (for persistence) and to the console (for immediate feedback during development or monitoring). This approach provides a centralized and flexible logging mechanism, making it easy to log messages from anywhere in your application using Python's built-in logging module.
+
 # B. Description of how you used environment variables and link to your code to illustrate.
 
 # C. Explain and link to how you are using logging.
