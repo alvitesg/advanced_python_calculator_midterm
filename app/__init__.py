@@ -3,8 +3,12 @@ import pkgutil
 import importlib
 from app.commands import CommandHandler, Command
 from dotenv import load_dotenv
+from app.plugins.logging_utility import LoggingUtility
 import logging
 import logging.config
+
+# Initialize logging at the start of your application
+LoggingUtility.initialize_logging()
 
 class App:
     def __init__(self): # Constructor and logging
@@ -59,6 +63,10 @@ class App:
                             continue  # If item is not a class or unrelated class, just ignore
     def start(self):
         # Register commands here
+        # command_handler.register_command("clear", ClearCommand(self.command_handler))
+        # command_handler.register_command("load", LoadCommand(app.command_handler))
+        # command_handler.register_command("delete", DeleteCommand(app.command_handler))
+
         self.load_plugins()
         logging.info("Application started. Type 'exit' to exit.")
         print("menu command provides a list of commands. Type command then number space number to execute commandexit.")
